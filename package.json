@@ -1,0 +1,29 @@
+{
+  "name": "mcp-leetcode-server",
+  "version": "1.0.0",
+  "description": "An MCP server that connects LLMs to LeetCode for practicing coding problems",
+  "type": "module",
+  "bin": {
+    "mcp-leetcode-server": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "test": "node scripts/test-connection.js",
+    "verify": "bash scripts/verify-setup.sh"
+  },
+  "keywords": ["mcp", "leetcode", "coding-practice", "interview-prep"],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "node-fetch": "^3.3.2",
+    "turndown": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/turndown": "^5.0.5",
+    "typescript": "^5.3.0"
+  }
+}
