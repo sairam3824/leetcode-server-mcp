@@ -1,0 +1,42 @@
+# How to Run the LeetCode MCP Server
+
+This MCP server cannot be run interactively directly from your terminal. Instead, it is meant to run in the background connected to an MCP Client (such as an AI assistant like Claude Desktop).
+
+## Steps to Start
+
+1. **Install Dependencies and Build** (only needed once, or after making code changes)
+   ```bash
+   npm install
+   npm run build
+   ```
+
+2. **Configure your AI Assistant (MCP Client)**
+   You need to specify the absolute path to `build/index.js` in your AI's settings. 
+
+   For Claude Desktop or similar MCP tools, add this structure to the config file (e.g., `~/Library/Application Support/Claude/claude_desktop_config.json` on Mac):
+
+   ```json
+   {
+     "mcpServers": {
+       "leetcode": {
+         "command": "node",
+         "args": [
+           "/Users/sairammaruri/Documents/New git projects/leetcode-server-mcp/build/index.js"
+         ]
+       }
+     }
+   }
+   ```
+   *(Note: Ensure the `/Users/sairammaruri/...` path is correct and points to the `build/index.js` script)*
+
+3. **Restart Your AI Assistant**
+   After saving the config file, fully restart your AI application.
+
+4. **Use It in Chat!**
+   You can now start a conversation with your AI and say things like:
+   - "Get me today's LeetCode daily challenge."
+   - "Fetch the LeetCode problem 'two-sum'."
+   - "Can you search for Easy problems involving 'trees'?"
+   - "Give me hints for the problem 'lru-cache'."
+
+The AI will handle executing the Node.js server to pull in the problem text, limits, and code hints for you!
