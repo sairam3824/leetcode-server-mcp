@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "leetcode": {
+      "command": "node",
+      "args": ["/absolute/path/to/mcp-leetcode-server/build/index.js"],
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
