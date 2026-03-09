@@ -70,15 +70,19 @@ export class LeetCodeAPI {
     const result = await this.graphqlQuery(query, { titleSlug: identifier });
     const q = result.data.question;
 
+    if (!q) {
+      throw new Error(`Problem not found: ${identifier}`);
+    }
+
     const problem = {
       id: q.questionId,
       title: q.title,
       titleSlug: q.titleSlug,
-      description: turndown.turndown(q.content),
+      description: q.content ? turndown.turndown(q.content) : "Premium or unavailable problem content.",
       difficulty: q.difficulty,
-      tags: q.topicTags.map((t: any) => t.name),
+      tags: q.topicTags?.map((t: any) => t.name) || [],
       examples: q.exampleTestcases,
-      acceptanceRate: JSON.parse(q.stats).acRate,
+      acceptanceRate: q.stats ? JSON.parse(q.stats).acRate : "Unknown",
     };
 
     this.setCache(cacheKey, problem, 24 * 60 * 60 * 1000); // 24 hours
@@ -107,7 +111,7 @@ export class LeetCodeAPI {
     if (tag) filters.tags = [tag];
 
     const result = await this.graphqlQuery(query, { categorySlug: "", filters });
-    const questions = result.data.problemsetQuestionList.questions;
+    const questions = result.data?.problemsetQuestionList?.questions || [];
 
     if (questions.length === 0) {
       throw new Error("No problems found matching criteria");
@@ -148,13 +152,13 @@ export class LeetCodeAPI {
       limit
     });
 
-    return result.data.problemsetQuestionList.questions.map((q: any) => ({
+    return (result.data?.problemsetQuestionList?.questions || []).map((q: any) => ({
       id: q.questionId,
       title: q.title,
       titleSlug: q.titleSlug,
       difficulty: q.difficulty,
-      tags: q.topicTags.map((t: any) => t.name),
-      acceptanceRate: JSON.parse(q.stats).acRate,
+      tags: q.topicTags?.map((t: any) => t.name) || [],
+      acceptanceRate: q.stats ? JSON.parse(q.stats).acRate : "Unknown",
     }));
   }
 
