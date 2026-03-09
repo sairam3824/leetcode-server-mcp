@@ -189,7 +189,7 @@ mcp-leetcode-server/
 
 ## License
 
-Apache License 2.0 - See [LICENSE](LICENSE) file for details
+MIT License - See [LICENSE](LICENSE) file for details
 
 ## Contributing
 

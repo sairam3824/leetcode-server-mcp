@@ -13,9 +13,14 @@
     "test": "node scripts/test-connection.js",
     "verify": "bash scripts/verify-setup.sh"
   },
-  "keywords": ["mcp", "leetcode", "coding-practice", "interview-prep"],
+  "keywords": [
+    "mcp",
+    "leetcode",
+    "coding-practice",
+    "interview-prep"
+  ],
   "author": "",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "node-fetch": "^3.3.2",
